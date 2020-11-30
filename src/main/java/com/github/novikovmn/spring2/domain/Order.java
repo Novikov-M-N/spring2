@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -28,4 +29,13 @@ public class Order {
 
     @Column(name = "address")
     private String address;
+
+    @Column(name = "price")
+    private BigDecimal price;
+
+    private Status status;
+
+    public enum Status{ // Реализовать как-нибудь изящнее
+        MANAGING, DELIVERING, DELIVERED
+    }
 }

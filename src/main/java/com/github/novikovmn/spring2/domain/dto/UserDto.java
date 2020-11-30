@@ -20,5 +20,5 @@ public class UserDto {
     @NotNull(message = "Возраст должен быть указан")
     private Integer age;
     @NotNull(message = "Тип пользователя должен быть указан")
-    private UserType userType;
+    private RoleDto roleDto;
 }

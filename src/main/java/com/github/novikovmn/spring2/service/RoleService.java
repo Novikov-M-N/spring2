@@ -21,7 +21,7 @@ public class RoleService {
         if (roleOptional.isPresent()) {
             return roleOptional.get();
         } else {
-            throw new RoleNotFoundException(String.format("Роль с именем %s не найдена.", name));
+            throw new RoleNotFoundException(String.format("Роль с именем %s не найдена", name));
         }
     }
 }

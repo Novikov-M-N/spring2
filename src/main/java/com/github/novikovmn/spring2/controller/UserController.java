@@ -2,7 +2,6 @@ package com.github.novikovmn.spring2.controller;
 
 import com.github.novikovmn.spring2.domain.User;
 import com.github.novikovmn.spring2.domain.dto.UserDto;
-import com.github.novikovmn.spring2.domain.dto.UserType;
 import com.github.novikovmn.spring2.service.UserService;
 import org.springframework.web.bind.annotation.*;
 

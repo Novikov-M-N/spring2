@@ -27,4 +27,24 @@ public class OrderItem {
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
+
+    public OrderItem(Product product, Integer quantity) {
+        this.product = product;
+        this.quantity = quantity;
+        this.price = new BigDecimal(String.valueOf(new BigDecimal(quantity).multiply(product.getPrice())));
+    }
+
+    public OrderItem(Product product) {
+        this(product, 1);
+    }
+
+    public void increment() {   // Сделать с параметром количество, на которое увеличивать
+        this.quantity++;
+        this.price = new BigDecimal(String.valueOf(this.price.add(this.product.getPrice())));
+    }
+
+    public void decrement() {   // Сделать с параметром количество, на которое уменьшать
+        this.quantity--;
+        this.price = new BigDecimal(String.valueOf(this.price.subtract(this.product.getPrice())));
+    }
 }

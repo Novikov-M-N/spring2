@@ -21,7 +21,7 @@ public class Product {
     @Column(name = "price")
     private BigDecimal price;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "products_categories",
             joinColumns = @JoinColumn(name = "product_id"),
@@ -29,6 +29,9 @@ public class Product {
     )
     private List<Category> categories;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
-    private List<Price> priceHistory;
+//    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+//    private List<Price> priceHistory;
+
+    @Override
+    public String toString() { return this.title; } // Надо ли оно в таком виде?
 }

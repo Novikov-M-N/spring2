@@ -2,7 +2,7 @@ package com.github.novikovmn.spring2.domain.dto;
 
 import com.github.novikovmn.spring2.exception.UserTypeNotFoundException;
 
-public enum UserType {
+public enum RoleDto {
     CUSTOMER,
     MANAGER,
     ADMIN;

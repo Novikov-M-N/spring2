@@ -3,14 +3,16 @@ package com.github.novikovmn.spring2.service;
 import com.github.novikovmn.spring2.domain.Role;
 import com.github.novikovmn.spring2.domain.User;
 import com.github.novikovmn.spring2.domain.dto.UserDto;
-import com.github.novikovmn.spring2.domain.dto.UserType;
+import com.github.novikovmn.spring2.domain.dto.RoleDto;
 import com.github.novikovmn.spring2.exception.ManagerIsEarlierThanNeedException;
 import com.github.novikovmn.spring2.exception.UnknownUserTypeException;
+import com.github.novikovmn.spring2.exception.UserNotFoundException;
 import com.github.novikovmn.spring2.exception.UserTypeNotFoundException;
 import com.github.novikovmn.spring2.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -23,9 +25,9 @@ public class UserService {
     }
 
     public User saveUser(UserDto userDto) {
-        if (userDto.getUserType().equals(UserType.MANAGER)) {
+        if (userDto.getRoleDto().equals(RoleDto.MANAGER)) {
             saveManager(userDto);
-        } else if (userDto.getUserType().equals(UserType.CUSTOMER)) {
+        } else if (userDto.getRoleDto().equals(RoleDto.CUSTOMER)) {
             saveTypicallyUser(userDto);
         }
         throw new UnknownUserTypeException();
@@ -64,11 +66,16 @@ public class UserService {
     public List<User> getAllUsersWithType(String role) {
         if (role == null) { return userRepository.findAll(); }
         try {
-            UserType userType = UserType.valueOf(role);
-            Role userRole = roleService.getByName(userType.getRole());
-            return userRepository.findByRoles(userRole);
+            RoleDto roleDto = RoleDto.valueOf(role);
+            Role userRole = roleService.getByName(roleDto.getRole());
+            return userRepository.findAllByRoles(userRole);
         } catch (IllegalArgumentException e) {
             throw new UserTypeNotFoundException(String.format("Тип пользователя %s не существует", role));
         }
+    }
+
+    public User getById(long id) {
+        return userRepository.findById(id).orElseThrow(
+                ()-> new UserNotFoundException(String.format("Пользователь с id = %d не найден", id)));
     }
 }

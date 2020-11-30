@@ -3,7 +3,6 @@ package com.github.novikovmn.spring2.domain;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
