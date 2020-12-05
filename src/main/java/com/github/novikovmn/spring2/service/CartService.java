@@ -35,7 +35,7 @@ public class CartService {
         recalculate();
     }
 
-    public void recalculate() { // Может, private?
+    public void recalculate() {
         price = new BigDecimal(0);
         // Попробовать обойтись без этой функции
         orderItems.stream().forEach(orderItem -> price = price.add(orderItem.getPrice()));

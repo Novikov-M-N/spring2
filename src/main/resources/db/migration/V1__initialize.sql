@@ -75,12 +75,12 @@ insert into roles
 
 insert into users
     (phone, password, first_name, last_name, email, age) values
-    ('11111111','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','admin-fn','admin-ln','admin@gmail.com', 25),
-    ('22222222','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','manager1-fn','manager1-ln','manager1@gmail.com', 24),
-    ('33333333','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','manager2-fn','manager2-ln','manager2@gmail.com', 23),
-    ('44444444','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','customer1-fn','customer1-ln','customer1@gmail.com', 22),
-    ('55555555','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','customer2-fn','customer2-ln','customer2@gmail.com', 21),
-    ('66666666','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','customer3-fn','customer3-ln','customer3@gmail.com', 20);
+    ('1111111111','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','admin-fn','admin-ln','admin@gmail.com', 25),
+    ('2222222222','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','manager1-fn','manager1-ln','manager1@gmail.com', 24),
+    ('3333333333','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','manager2-fn','manager2-ln','manager2@gmail.com', 23),
+    ('4444444444','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','customer1-fn','customer1-ln','customer1@gmail.com', 22),
+    ('5555555555','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','customer2-fn','customer2-ln','customer2@gmail.com', 21),
+    ('6666666666','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','customer3-fn','customer3-ln','customer3@gmail.com', 20);
 
 insert into users_roles
     (user_id, role_id)  values
