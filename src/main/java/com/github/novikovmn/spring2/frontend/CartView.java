@@ -30,12 +30,10 @@ public class CartView extends AbstractView {
         grid.addColumn(new ComponentRenderer<>(item -> {
             Button plusButton = new Button("+", action -> {
                 item.increment();
-                Notification.show("plus pressed");
                 grid.setItems(cartService.getOrderItems());
             });
             Button minusButton = new Button("-", action -> {
                 item.decrement();
-                Notification.show("minus pressed");
                 grid.setItems(cartService.getOrderItems());
             });
             return new HorizontalLayout(plusButton,minusButton);
@@ -43,6 +41,8 @@ public class CartView extends AbstractView {
 
         TextField addressField = initTextFieldWithPlaceholder("Введите адрес доставки");
         TextField phoneField = initTextFieldWithPlaceholder("Введите номер телефона");
+        phoneField.setPattern("\\d*");
+        phoneField.setPreventInvalidInput(true);
 
         Button toOrderButton = new Button("Создать заказ", e -> {
             cartService.setAddress(addressField.getValue());

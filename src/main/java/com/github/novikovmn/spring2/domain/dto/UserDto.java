@@ -1,8 +1,12 @@
 package com.github.novikovmn.spring2.domain.dto;
 
+import com.github.novikovmn.spring2.domain.Role;
+import com.github.novikovmn.spring2.domain.User;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class UserDto {
@@ -20,5 +24,18 @@ public class UserDto {
     @NotNull(message = "Возраст должен быть указан")
     private Integer age;
     @NotNull(message = "Тип пользователя должен быть указан")
-    private RoleDto roleDto;
+    private List<RoleDto> roles;
+
+    public UserDto(User template) {
+        this.phone = template.getPhone();
+        this.password = template.getPassword();
+        this.firstName = template.getFirstName();
+        this.lastName = template.getLastName();
+        this.email = template.getEmail();
+        this.age = template.getAge();
+        this.roles = new ArrayList<>();
+        for (Role role : template.getRoles()) {
+            this.roles.add(RoleDto.valueOf(role.getName().split("_")[1]));
+        }
+    }
 }

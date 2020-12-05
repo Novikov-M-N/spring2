@@ -25,9 +25,9 @@ public class UserService {
     }
 
     public User saveUser(UserDto userDto) {
-        if (userDto.getRoleDto().equals(RoleDto.MANAGER)) {
+        if (userDto.getRoles().contains(RoleDto.MANAGER)) {
             saveManager(userDto);
-        } else if (userDto.getRoleDto().equals(RoleDto.CUSTOMER)) {
+        } else if (userDto.getRoles().contains(RoleDto.CUSTOMER)) {
             saveTypicallyUser(userDto);
         }
         throw new UnknownUserTypeException();

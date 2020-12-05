@@ -46,6 +46,7 @@ public class OrderItem {
     }
 
     public void decrement() {   // Сделать с параметром количество, на которое уменьшать
+        if (this.quantity == 0) { return; }
         this.quantity--;
         this.price = new BigDecimal(String.valueOf(this.price.subtract(this.product.getPrice())));
     }
