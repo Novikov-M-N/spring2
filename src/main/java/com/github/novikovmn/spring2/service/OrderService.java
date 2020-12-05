@@ -32,13 +32,15 @@ public class OrderService {
         order.setOrderItems(cartService.getOrderItems());
         order.setAddress(cartService.getAddress());
         order.setPhone(cartService.getPhone());
-        order.setUser(userService.getById(1L));
+        order.setUser(userService.getById(4L));
         order.setPrice(cartService.getPrice());
 
-        final Order savedOrder = orderRepository.save(order);
         List<OrderItem> orderItems = order.getOrderItems().stream()
-                .peek(orderItem -> orderItem.setOrder(savedOrder))
+                .peek(orderItem -> orderItem.setOrder(order))
                 .collect(Collectors.toList());
+
+        orderRepository.save(order);
+
         orderItemRepository.saveAll(orderItems);
     }
 

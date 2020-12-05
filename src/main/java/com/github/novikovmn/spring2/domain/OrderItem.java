@@ -38,6 +38,8 @@ public class OrderItem {
         this(product, 1);
     }
 
+    public OrderItem() {}
+
     public void increment() {   // Сделать с параметром количество, на которое увеличивать
         this.quantity++;
         this.price = new BigDecimal(String.valueOf(this.price.add(this.product.getPrice())));

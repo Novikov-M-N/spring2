@@ -20,11 +20,11 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<OrderItem> orderItems;
 
-    @Column(name = "phone")
+    @Column(name = "phone_number")
     private String phone;
 
     @Column(name = "address")

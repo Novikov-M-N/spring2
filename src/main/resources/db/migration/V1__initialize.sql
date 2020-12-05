@@ -13,26 +13,6 @@ insert into products
     ('Apples', 'Fresh apples', 80.0),
     ('Bread', 'Fresh bread', 30.0);
 
-drop table if exists prices cascade;
-create table prices (
-    id                  bigserial,
-    product_id          bigint,
-    price               numeric(8, 2),
-    from_date           timestamp,
-    to_date             timestamp,
-    primary key(id)
-);
-insert into prices
-    (product_id, price, from_date, to_date) values
-    (1, 300.0, '2020-08-25 00:00:00', '2020-09-25 00:00:00'),
-    (1, 310.0, '2020-09-25 00:00:00', '2020-10-25 00:00:00'),
-    (2, 70.0, '2020-08-26 00:00:00', '2020-09-26 00:00:00'),
-    (2, 75.0, '2020-09-26 00:00:00', '2020-10-26 00:00:00'),
-    (3, 65.0, '2020-08-27 00:00:00', '2020-09-27 00:00:00'),
-    (3, 70.0, '2020-09-27 00:00:00', '2020-10-27 00:00:00'),
-    (4, 25.0, '2020-08-28 00:00:00', '2020-09-28 00:00:00'),
-    (4, 28.0, '2020-09-28 00:00:00', '2020-10-28 00:00:00');
-
 drop table if exists categories cascade;
 create table categories (
     id                  bigserial,
@@ -71,27 +51,12 @@ create table users (
     PRIMARY KEY (id)
 );
 
-insert into users
-    (phone, password, first_name, last_name, email) values
-    ('11111111','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','admin-fn','admin-ln','admin@gmail.com'),
-    ('22222222','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','manager1-fn','manager1-ln','manager1@gmail.com'),
-    ('33333333','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','manager2-fn','manager2-ln','manager2@gmail.com'),
-    ('44444444','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','customer1-fn','customer1-ln','customer1@gmail.com'),
-    ('55555555','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','customer2-fn','customer2-ln','customer2@gmail.com'),
-    ('66666666','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','customer3-fn','customer3-ln','customer3@gmail.com');
-
 drop table if exists roles;
 create table roles (
     id                  serial,
     name                VARCHAR(50) not null,
     primary key (id)
 );
-insert into roles
-    (name) values
-    ('ROLE_CUSTOMER'),
-    ('ROLE_MANAGER'),
-    ('ROLE_ADMIN');
-
 
 drop table if exists users_roles;
 create table users_roles (
@@ -101,6 +66,21 @@ create table users_roles (
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (role_id) REFERENCES roles (id)
 );
+
+insert into roles
+    (name) values
+    ('ROLE_CUSTOMER'),
+    ('ROLE_MANAGER'),
+    ('ROLE_ADMIN');
+
+insert into users
+    (phone, password, first_name, last_name, email, age) values
+    ('11111111','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','admin-fn','admin-ln','admin@gmail.com', 25),
+    ('22222222','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','manager1-fn','manager1-ln','manager1@gmail.com', 24),
+    ('33333333','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','manager2-fn','manager2-ln','manager2@gmail.com', 23),
+    ('44444444','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','customer1-fn','customer1-ln','customer1@gmail.com', 22),
+    ('55555555','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','customer2-fn','customer2-ln','customer2@gmail.com', 21),
+    ('66666666','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','customer3-fn','customer3-ln','customer3@gmail.com', 20);
 
 insert into users_roles
     (user_id, role_id)  values
@@ -138,3 +118,23 @@ create table orders_items (
     constraint fk_prod_id foreign key (product_id) references products (id),
     constraint fk_order_id foreign key (order_id) references orders (id)
 );
+
+drop table if exists prices cascade;
+create table prices (
+    id                  bigserial,
+    product_id          bigint,
+    price               numeric(8, 2),
+    from_date           timestamp,
+    to_date             timestamp,
+    primary key(id)
+);
+insert into prices
+    (product_id, price, from_date, to_date) values
+    (1, 300.0, '2020-08-25 00:00:00', '2020-09-25 00:00:00'),
+    (1, 310.0, '2020-09-25 00:00:00', '2020-10-25 00:00:00'),
+    (2, 70.0, '2020-08-26 00:00:00', '2020-09-26 00:00:00'),
+    (2, 75.0, '2020-09-26 00:00:00', '2020-10-26 00:00:00'),
+    (3, 65.0, '2020-08-27 00:00:00', '2020-09-27 00:00:00'),
+    (3, 70.0, '2020-09-27 00:00:00', '2020-10-27 00:00:00'),
+    (4, 25.0, '2020-08-28 00:00:00', '2020-09-28 00:00:00'),
+    (4, 28.0, '2020-09-28 00:00:00', '2020-10-28 00:00:00');

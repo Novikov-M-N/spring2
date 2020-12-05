@@ -23,16 +23,16 @@ public class CartService {
     @PostConstruct
     public void init() { orderItems = new ArrayList<>(); }
 
-    public void add(Product product, Integer quantity) {
+    public void add(Product product) { // Сделать возможность добавлять товары по нескольку штук
         for (OrderItem orderItem: orderItems) {
             if (orderItem.getProduct().getId().equals(product.getId())) {
-                for (int i = 0; i < quantity; i++) {
-                    orderItem.increment();
-                }
+                orderItem.increment();
                 recalculate();
                 return;
             }
         }
+        orderItems.add(new OrderItem(product));
+        recalculate();
     }
 
     public void recalculate() { // Может, private?
