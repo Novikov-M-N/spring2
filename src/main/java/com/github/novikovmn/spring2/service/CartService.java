@@ -18,7 +18,6 @@ public class CartService {
     private List<OrderItem> orderItems;
     private BigDecimal price;
     private String address; // Может, получать через связанный объект User
-    private String phone; // Может, получать через связанный объект User
 
     @PostConstruct
     public void clear() { this.orderItems = new ArrayList<>(); }

@@ -1,5 +1,6 @@
 package com.github.novikovmn.spring2.service;
 
+import com.github.novikovmn.spring2.aspect.TimerLogger;
 import com.github.novikovmn.spring2.domain.Order;
 import com.github.novikovmn.spring2.domain.OrderItem;
 import com.github.novikovmn.spring2.domain.User;
@@ -28,6 +29,7 @@ public class OrderService {
         this.orderItemRepository = orderItemRepository;
     }
 
+    @TimerLogger
     public void saveOrder() {
         User user = userService.getById(1L);
         Order order = new Order();

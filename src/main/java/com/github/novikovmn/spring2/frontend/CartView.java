@@ -40,18 +40,14 @@ public class CartView extends AbstractView {
         }));
 
         TextField addressField = initTextFieldWithPlaceholder("Введите адрес доставки");
-        TextField phoneField = initTextFieldWithPlaceholder("Введите номер телефона");
-        phoneField.setPattern("\\d*");
-        phoneField.setPreventInvalidInput(true);
 
         Button toOrderButton = new Button("Создать заказ", e -> {
             cartService.setAddress(addressField.getValue());
-            cartService.setPhone(phoneField.getValue());
             orderService.saveOrder();
             Notification.show("Заказ успешно сохранён и передан менеджеру");
         });
 
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
-        add(grid, addressField, phoneField, toOrderButton);
+        add(grid, addressField, toOrderButton);
     }
 }
