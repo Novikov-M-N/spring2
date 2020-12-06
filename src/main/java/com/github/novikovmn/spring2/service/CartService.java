@@ -21,7 +21,7 @@ public class CartService {
     private String phone; // Может, получать через связанный объект User
 
     @PostConstruct
-    public void init() { orderItems = new ArrayList<>(); }
+    public void clear() { this.orderItems = new ArrayList<>(); }
 
     public void add(Product product) { // Сделать возможность добавлять товары по нескольку штук
         for (OrderItem orderItem: orderItems) {

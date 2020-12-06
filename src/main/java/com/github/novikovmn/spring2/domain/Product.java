@@ -21,7 +21,7 @@ public class Product {
     @Column(name = "price")
     private BigDecimal price;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "products_categories",
             joinColumns = @JoinColumn(name = "product_id"),

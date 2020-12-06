@@ -17,7 +17,7 @@ drop table if exists categories cascade;
 create table categories (
     id                  bigserial,
     title               varchar(255),
-    primary             key(id)
+    primary key(id)
 );
 insert into categories
     (title) values
@@ -75,7 +75,7 @@ insert into roles
 
 insert into users
     (phone, password, first_name, last_name, email, age) values
-    ('1111111111','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','admin-fn','admin-ln','admin@gmail.com', 25),
+    ('1111111111','$2y$12$rxg3cYnpaZsNwAVuaiKZXeDb69dR.h9foNdfARmOp/9UBRLymKV22','admin-fn','admin-ln','admin@gmail.com', 25),
     ('2222222222','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','manager1-fn','manager1-ln','manager1@gmail.com', 24),
     ('3333333333','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','manager2-fn','manager2-ln','manager2@gmail.com', 23),
     ('4444444444','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','customer1-fn','customer1-ln','customer1@gmail.com', 22),
@@ -107,16 +107,24 @@ create table orders (
     constraint fk_user_id foreign key (user_id) references users (id)
 );
 
-drop table if exists orders_items cascade;
-create table orders_items (
+drop table if exists items cascade;
+create table items (
     id                  bigserial,
-    order_id            bigint not null,
     product_id          bigint not null,
     quantity            int,
     price               numeric(8, 2),
     primary key(id),
-    constraint fk_prod_id foreign key (product_id) references products (id),
-    constraint fk_order_id foreign key (order_id) references orders (id)
+    foreign key (product_id) references products (id)
+);
+
+drop table if exists orders_items cascade;
+create table orders_items (
+    id                  bigserial,
+    order_id            bigint not null,
+    item_id             bigint not null,
+    primary key(id),
+    foreign key (order_id) references orders (id),
+    foreign key (item_id) references items (id)
 );
 
 drop table if exists prices cascade;

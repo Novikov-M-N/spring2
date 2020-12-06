@@ -2,9 +2,11 @@ package com.github.novikovmn.spring2.service;
 
 import com.github.novikovmn.spring2.domain.Order;
 import com.github.novikovmn.spring2.domain.OrderItem;
+import com.github.novikovmn.spring2.domain.User;
 import com.github.novikovmn.spring2.repository.OrderItemRepository;
 import com.github.novikovmn.spring2.repository.OrderRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +17,6 @@ public class OrderService {
     private final CartService cartService;
     private final UserService userService;
     private final OrderItemRepository orderItemRepository;
-
 
     public OrderService(OrderRepository orderRepository,
                         CartService cartService,
@@ -28,22 +29,20 @@ public class OrderService {
     }
 
     public void saveOrder() {
+        User user = userService.getById(1L);
         Order order = new Order();
+        order.setUser(user);
         order.setOrderItems(cartService.getOrderItems());
         order.setAddress(cartService.getAddress());
-        order.setPhone(cartService.getPhone());
-        order.setUser(userService.getById(4L));
+        order.setPhone(user.getPhone());
         order.setPrice(cartService.getPrice());
-
-        List<OrderItem> orderItems = order.getOrderItems().stream()
-                .peek(orderItem -> orderItem.setOrder(order))
-                .collect(Collectors.toList());
+        order.setStatus(Order.Status.MANAGING);
 
         orderRepository.save(order);
-
-        orderItemRepository.saveAll(orderItems);
+        cartService.clear();
     }
 
+    @Transactional
     public List<Order> getByUserId(Long userId) {
         return orderRepository.findAllByUserId(userId);
     }

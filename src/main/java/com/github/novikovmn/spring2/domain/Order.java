@@ -16,12 +16,14 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "orders_items",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<OrderItem> orderItems;
 
     @Column(name = "phone_number")
@@ -33,6 +35,7 @@ public class Order {
     @Column(name = "price")
     private BigDecimal price;
 
+    @Column(name = "status")
     private Status status;
 
     public enum Status{ // Реализовать как-нибудь изящнее
