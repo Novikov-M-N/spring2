@@ -51,41 +51,47 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.openapitools</groupId>
-                <artifactId>openapi-generator-maven-plugin</artifactId>
-                <!-- RELEASE_VERSION -->
-                <version>4.3.1</version>
-                <!-- /RELEASE_VERSION -->
-                <executions>
-                    <execution>
-                        <id>openapitools</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/api-description.yaml</inputSpec>
-                            <apiPackage>club.api</apiPackage>
-                            <modelPackage>club.api</modelPackage>
-                            <generatorName>spring</generatorName>
-                            <generateModelTests>false</generateModelTests>
-                            <generateApiTests>false</generateApiTests>
-                            <generateSupportingFiles>false</generateSupportingFiles>
-                            <configOptions>
-                                <interfaceOnly>true</interfaceOnly>
-                                <dateLibrary>java8</dateLibrary>
-                                <skipDefaultInterface>true</skipDefaultInterface>
-                                <sourceFolder>.</sourceFolder>
-                            </configOptions>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.openapitools</groupId>-->
+<!--                <artifactId>openapi-generator-maven-plugin</artifactId>-->
+<!--                &lt;!&ndash; RELEASE_VERSION &ndash;&gt;-->
+<!--                <version>4.3.1</version>-->
+<!--                &lt;!&ndash; /RELEASE_VERSION &ndash;&gt;-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>openapitools</id>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <inputSpec>${project.basedir}/src/main/resources/api-description.yaml</inputSpec>-->
+<!--                            <apiPackage>club.api</apiPackage>-->
+<!--                            <modelPackage>club.api</modelPackage>-->
+<!--                            <generatorName>spring</generatorName>-->
+<!--                            <generateModelTests>false</generateModelTests>-->
+<!--                            <generateApiTests>false</generateApiTests>-->
+<!--                            <generateSupportingFiles>false</generateSupportingFiles>-->
+<!--                            <configOptions>-->
+<!--                                <interfaceOnly>true</interfaceOnly>-->
+<!--                                <dateLibrary>java8</dateLibrary>-->
+<!--                                <skipDefaultInterface>true</skipDefaultInterface>-->
+<!--                                <sourceFolder>.</sourceFolder>-->
+<!--                            </configOptions>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
 </project>
