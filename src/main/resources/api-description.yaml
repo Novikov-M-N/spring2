@@ -1,0 +1,31 @@
+openapi: 3.0.0
+info:
+  title: Vaadin project
+  version: 0.1.9
+servers:
+  - url: https://localhost:8080/api
+    description: Сервер для тестирования
+paths:
+  /payment:
+    get:
+      tags:
+        - payment-controller
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentOutput'
+components:
+  schemas:
+    PaymentOutput:
+      type: object
+      properties:
+        id:
+          required: true
+          type: string
+          format: uuid
+        name:
+          required: true
+          type: string
