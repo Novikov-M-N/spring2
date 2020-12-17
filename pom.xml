@@ -7,9 +7,12 @@
     <groupId>com.github.novikovmn</groupId>
     <artifactId>spring2</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>sequence-application</module>
+    </modules>
     <name>spring2</name>
     <description>Market - Geekbrains training project</description>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <properties>
         <java.version>14</java.version>
@@ -31,6 +34,26 @@
             <groupId>org.springframework.integration</groupId>
             <artifactId>spring-integration-amqp</artifactId>
             <version>5.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.12.0</version>
         </dependency>
     </dependencies>
 
