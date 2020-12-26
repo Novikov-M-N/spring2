@@ -1,7 +1,5 @@
 package com.github.novikovmn.spring2.domain.dto;
 
-import com.github.novikovmn.spring2.exception.UserTypeNotFoundException;
-
 public enum RoleDto {
     CUSTOMER,
     MANAGER,
@@ -9,5 +7,8 @@ public enum RoleDto {
 
     public String getRole() {
         return "ROLE_" + this.name();
+    }
+    public static RoleDto fromRole(String role) {
+        return valueOf(role.split("_")[1]);
     }
 }

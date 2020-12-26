@@ -21,7 +21,7 @@ public class Product {
     @Column(name = "price")
     private BigDecimal price;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "products_categories",
             joinColumns = @JoinColumn(name = "product_id"),
@@ -34,4 +34,26 @@ public class Product {
 
     @Override
     public String toString() { return this.title; } // Надо ли оно в таком виде?
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == this) { return true; }
+        if (object == null || object.getClass() != this.getClass()) { return false; }
+        Product product = (Product) object;
+        return product.id == this.id
+                && product.title.equals(this.title)
+                && product.price.equals(this.price)
+                && categoriesIsEquals(product.categories)
+                ;
+    }
+
+    private boolean categoriesIsEquals(List<Category> categories) {
+        if (categories == null && this.categories == null) { return true; }
+        if (categories == this.categories) { return true; }
+        if (categories.size() != this.categories.size()) { return false; }
+        for (int i = 0; i < this.categories.size(); i++) {
+            if (!this.categories.get(i).equals(categories.get(i))) { return false; }
+        }
+        return true;
+    }
 }

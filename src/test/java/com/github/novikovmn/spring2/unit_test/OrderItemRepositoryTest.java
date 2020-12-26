@@ -1,7 +1,6 @@
 package com.github.novikovmn.spring2.unit_test;
 
 import com.github.novikovmn.spring2.Utils;
-import com.github.novikovmn.spring2.domain.Category;
 import com.github.novikovmn.spring2.domain.OrderItem;
 import com.github.novikovmn.spring2.domain.Product;
 import com.github.novikovmn.spring2.repository.OrderItemRepository;
@@ -25,6 +24,9 @@ public class OrderItemRepositoryTest {
 
     @Test
     public void CrudTest() {
+        /**
+         * Prepare test objects
+         */
         List<Product> products = testProductRepository.findAll();
         List<OrderItem> orderItems = new ArrayList<>();
         int i = 1;
@@ -41,7 +43,7 @@ public class OrderItemRepositoryTest {
          * Create test
          */
         int beforeSize = Utils.sizeOf(testOrderItemRepository.findAll());
-        for (OrderItem orderItem: orderItems) {
+        for (OrderItem orderItem : orderItems) {
             testOrderItemRepository.save(orderItem);
             Assertions.assertEquals(orderItem, testOrderItemRepository.findById(orderItem.getId()).get());
         }
@@ -51,26 +53,31 @@ public class OrderItemRepositoryTest {
         /**
          * Update test
          */
-//        beforeSize = Utils.sizeOf(testCategoryRepository.findAll());
-//        for (int i = 1; i < 11; i++) {
-//            Category category = testCategoryRepository.findByTitle("test category #" + i).get();
-//            category.setTitle(category.getTitle() + " edited");
-//            testCategoryRepository.save(category);
-//            Assertions.assertEquals(category, testCategoryRepository.findByTitle(category.getTitle()).get());
-//        }
-//        afterSize = Utils.sizeOf(testCategoryRepository.findAll());
-//        Assertions.assertEquals(0, afterSize - beforeSize);
-//
-//        /**
-//         * Delete test
-//         */
-//        beforeSize = Utils.sizeOf(testCategoryRepository.findAll());
-//        for (int i = 1; i < 11; i++) {
-//            Category category = testCategoryRepository.findByTitle("test category #" + i + " edited").get();
-//            testCategoryRepository.delete(category);
-//            Assertions.assertEquals(Optional.empty(), testCategoryRepository.findById(category.getId()));
-//        }
-//        afterSize = Utils.sizeOf(testCategoryRepository.findAll());
-//        Assertions.assertEquals(10, beforeSize - afterSize);
+        beforeSize = Utils.sizeOf(testOrderItemRepository.findAll());
+        for (OrderItem orderItem : orderItems) {
+            BigDecimal beforePrice = orderItem.getPrice();
+            int countOfIncrements = 2;
+            for (int j = 0; j < countOfIncrements; j++) {
+                orderItem.increment();
+            }
+            BigDecimal priceDifference = orderItem.getProduct().getPrice()
+                    .multiply(BigDecimal.valueOf(countOfIncrements));
+            testOrderItemRepository.save(orderItem);
+            Assertions.assertEquals(orderItem, testOrderItemRepository.findById(orderItem.getId()).get());
+            Assertions.assertEquals(priceDifference, orderItem.getPrice().subtract(beforePrice));
+        }
+        afterSize = Utils.sizeOf(testOrderItemRepository.findAll());
+        Assertions.assertEquals(0, afterSize - beforeSize);
+
+        /**
+         * Delete test
+         */
+        beforeSize = Utils.sizeOf(testOrderItemRepository.findAll());
+        for (OrderItem orderItem : orderItems) {
+            testOrderItemRepository.delete(orderItem);
+            Assertions.assertEquals(Optional.empty(), testOrderItemRepository.findById(orderItem.getId()));
+        }
+        afterSize = Utils.sizeOf(testOrderItemRepository.findAll());
+        Assertions.assertEquals(products.size(), beforeSize - afterSize);
     }
 }

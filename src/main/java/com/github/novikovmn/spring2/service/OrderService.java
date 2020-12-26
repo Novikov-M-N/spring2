@@ -30,8 +30,8 @@ public class OrderService {
     }
 
     @TimerLogger
-    public void saveOrder() {
-        User user = userService.getById(1L);
+    public void saveOrder(long userId) {
+        User user = userService.getById(userId);
         Order order = new Order();
         order.setUser(user);
         order.setOrderItems(cartService.getOrderItems());

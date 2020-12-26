@@ -19,6 +19,9 @@ public class CategoryRepositoryTest {
 
     @Test
     public void crudTest() {
+        /**
+         * Prepare test objects
+         */
         List<Category> categories = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Category category = new Category();

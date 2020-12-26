@@ -52,14 +52,15 @@ public class OrderItem {
         this.price = new BigDecimal(String.valueOf(this.price.subtract(this.product.getPrice())));
     }
 
+    @Override
     public boolean equals(Object object) {
         if (object == this) { return true; }
         if (object == null || object.getClass() != this.getClass()) { return false; }
         OrderItem orderItem = (OrderItem) object;
         return orderItem.id == this.id
-//                && orderItem.product.equals(this.product)
-                && orderItem.quantity.equals(this.quantity)
-//                && orderItem.price.equals(this.price)
+                && orderItem.product.equals(this.product)
+                && orderItem.quantity == this.quantity
+                && orderItem.price.equals(this.price)
                 ;
     }
 

@@ -25,9 +25,10 @@ public class UserService {
 
     public User saveUser(UserDto userDto) {
         if (userDto.getRoles().contains(RoleDto.MANAGER)) {
-            saveManager(userDto);
+            return saveManager(userDto);
         } else if (userDto.getRoles().contains(RoleDto.CUSTOMER)) {
-            saveTypicallyUser(userDto);
+            return saveTypicallyUser(userDto);
+
         }
         throw new UnknownUserTypeException();
     }
@@ -35,7 +36,7 @@ public class UserService {
     private User saveTypicallyUser(UserDto userDto) {
         User user = createUserFromDto(userDto);
 
-        Role role = roleService.getByName("ROLE_USER");
+        Role role = roleService.getByName("ROLE_CUSTOMER");
         user.setRoles(List.of(role));
         return userRepository.save(user);
     }
@@ -65,7 +66,7 @@ public class UserService {
     public List<User> getAllUsersWithType(String role) {
         if (role == null) { return userRepository.findAll(); }
         try {
-            RoleDto roleDto = RoleDto.valueOf(role);
+            RoleDto roleDto = RoleDto.fromRole(role);
             Role userRole = roleService.getByName(roleDto.getRole());
             return userRepository.findAllByRoles(userRole);
         } catch (IllegalArgumentException e) {

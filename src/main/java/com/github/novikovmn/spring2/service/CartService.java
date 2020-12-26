@@ -30,7 +30,7 @@ public class CartService {
                 return;
             }
         }
-//        orderItems.add(new OrderItem(product));
+        orderItems.add(new OrderItem(product));
         recalculate();
     }
 
