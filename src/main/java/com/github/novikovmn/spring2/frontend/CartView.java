@@ -43,7 +43,7 @@ public class CartView extends AbstractView {
 
         Button toOrderButton = new Button("Создать заказ", e -> {
             cartService.setAddress(addressField.getValue());
-            orderService.saveOrder();
+            orderService.saveOrder(1L);
             Notification.show("Заказ успешно сохранён и передан менеджеру");
         });
 
