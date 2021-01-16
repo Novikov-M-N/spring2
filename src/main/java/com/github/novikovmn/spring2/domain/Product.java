@@ -1,6 +1,8 @@
 package com.github.novikovmn.spring2.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -29,8 +31,9 @@ public class Product {
     )
     private List<Category> categories;
 
-//    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
-//    private List<Price> priceHistory;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "product")
+    private List<Price> priceHistory;
 
     @Override
     public String toString() { return this.title; } // Надо ли оно в таком виде?

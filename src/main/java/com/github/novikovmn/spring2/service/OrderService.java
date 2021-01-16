@@ -9,6 +9,7 @@ import com.github.novikovmn.spring2.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,22 +31,24 @@ public class OrderService {
     }
 
     @TimerLogger
-    public void saveOrder(long userId) {
-        User user = userService.getById(userId);
+    public void saveOrder(User user) {
         Order order = new Order();
         order.setUser(user);
+        BigDecimal price = cartService.getPrice();
         order.setOrderItems(cartService.getOrderItems());
         order.setAddress(cartService.getAddress());
         order.setPhone(user.getPhone());
-        order.setPrice(cartService.getPrice());
+        order.setPrice(price);
         order.setStatus(Order.Status.MANAGING);
+
+        user.setBalance(user.getBalance().subtract(price));
 
         orderRepository.save(order);
         cartService.clear();
     }
 
     @Transactional
-    public List<Order> getByUserId(Long userId) {
-        return orderRepository.findAllByUserId(userId);
+    public List<Order> getByUser(User user) {
+        return orderRepository.findAllByUserId(user.getId());
     }
 }

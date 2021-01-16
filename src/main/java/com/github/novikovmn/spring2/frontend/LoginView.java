@@ -1,5 +1,7 @@
 package com.github.novikovmn.spring2.frontend;
 
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -18,7 +20,11 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
         login.setAction("login");
-        add(new H1("Vaadin Shop"), login);
+        Button registrationButton = new Button("Регистрация", e -> {
+            UI.getCurrent().navigate("registration");
+        });
+        registrationButton.setSizeUndefined();
+        add(new H1("Vaadin Shop"), login, registrationButton);
     }
 
     @Override

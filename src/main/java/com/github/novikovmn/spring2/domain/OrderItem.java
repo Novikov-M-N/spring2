@@ -41,15 +41,35 @@ public class OrderItem {
 
     public OrderItem() {}
 
-    public void increment() {   // Сделать с параметром количество, на которое увеличивать
-        this.quantity++;
-        this.price = new BigDecimal(String.valueOf(this.price.add(this.product.getPrice())));
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+        this.price = this.product.getPrice().multiply(BigDecimal.valueOf(quantity));
     }
 
-    public void decrement() {   // Сделать с параметром количество, на которое уменьшать
+    public void increment() {
+        increment(1);
+    }
+
+    public void increment(int quantity) {
+        this.quantity+=quantity;
+        this.price = new BigDecimal(String.valueOf(
+                this.price.add(this.product.getPrice().multiply(BigDecimal.valueOf(quantity)))));
+    }
+
+    public void decrement() {
+        decrement(1);
+    }
+
+    public void decrement(int quantity) {
         if (this.quantity == 0) { return; }
-        this.quantity--;
-        this.price = new BigDecimal(String.valueOf(this.price.subtract(this.product.getPrice())));
+        this.quantity-=quantity;
+        if (this.quantity <= 0) {
+            this.quantity = 0;
+            this.price = BigDecimal.valueOf(0);
+            return;
+        }
+        this.price = new BigDecimal(String.valueOf(
+                this.price.subtract(this.product.getPrice()).multiply(BigDecimal.valueOf(quantity))));
     }
 
     @Override
