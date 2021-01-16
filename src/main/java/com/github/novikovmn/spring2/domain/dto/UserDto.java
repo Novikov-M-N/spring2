@@ -2,6 +2,7 @@ package com.github.novikovmn.spring2.domain.dto;
 
 import com.github.novikovmn.spring2.domain.Role;
 import com.github.novikovmn.spring2.domain.User;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 public class UserDto {
 
     @NotNull(message = "Телефон должен быть указан")
@@ -35,7 +37,7 @@ public class UserDto {
         this.age = template.getAge();
         this.roles = new ArrayList<>();
         for (Role role : template.getRoles()) {
-            this.roles.add(RoleDto.valueOf(role.getName().split("_")[1]));
+            this.roles.add(RoleDto.valueOf(role.getName()));
         }
     }
 }

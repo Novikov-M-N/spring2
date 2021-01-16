@@ -22,15 +22,19 @@ public class CartService {
     @PostConstruct
     public void clear() { this.orderItems = new ArrayList<>(); }
 
-    public void add(Product product) { // Сделать возможность добавлять товары по нескольку штук
+    public void add(Product product) {
+        add(product, 1);
+    }
+
+    public void add(Product product, int quantity) {
         for (OrderItem orderItem: orderItems) {
             if (orderItem.getProduct().getId().equals(product.getId())) {
-                orderItem.increment();
+                orderItem.increment(quantity);
                 recalculate();
                 return;
             }
         }
-        orderItems.add(new OrderItem(product));
+        orderItems.add(new OrderItem(product, quantity));
         recalculate();
     }
 

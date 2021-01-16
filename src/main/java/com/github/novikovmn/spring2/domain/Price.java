@@ -27,4 +27,12 @@ public class Price {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private Product product;
+
+    @Override
+    public String toString() {
+        String priceString = price.toString();
+        String fromString = from.toString().length() > 10 ? from.toString().substring(0, 10) : from.toString();
+        String toString = to.toString().length() > 10 ? to.toString().substring(0, 10) : to.toString();
+        return priceString + " " + fromString + " " + toString;
+    }
 }

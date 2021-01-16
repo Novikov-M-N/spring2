@@ -52,7 +52,7 @@ public class UserServiceTest {
             i++;
             Role role = new Role();
             role.setId(i);
-            role.setName(roleDto.getRole());
+            role.setName(roleDto.name());
             roles.add(role);
 
             String roleName = role.getName();

@@ -1,7 +1,6 @@
 package com.github.novikovmn.spring2.unit_test;
 
 import com.github.novikovmn.spring2.domain.*;
-import com.github.novikovmn.spring2.repository.OrderItemRepository;
 import com.github.novikovmn.spring2.repository.OrderRepository;
 import com.github.novikovmn.spring2.service.CartService;
 import com.github.novikovmn.spring2.service.OrderService;
@@ -119,7 +118,7 @@ public class OrderServiceTest {
             Mockito.when(testCartService.getPrice()).thenReturn(order.getPrice());
             Mockito.when(testOrderRepository.save(order)).thenReturn(order);
             Mockito.doNothing().when(testCartService).clear();
-            testOrderService.saveOrder(user.getId());
+            testOrderService.saveOrder(user);
 
             Mockito.verify(testUserService,
                     Mockito.times(1)).getById(ArgumentMatchers.eq(user.getId()));
@@ -147,7 +146,7 @@ public class OrderServiceTest {
                 if (order.getUser().equals(user)) {userOrders.add(order); }
             }
             Mockito.when(testOrderRepository.findAllByUserId(user.getId())).thenReturn(userOrders);
-            List<Order> getttedUserOrders = testOrderService.getByUserId(user.getId());
+            List<Order> getttedUserOrders = testOrderService.getByUser(user);
 
             Assertions.assertEquals(userOrders, getttedUserOrders);
             Mockito.verify(testOrderRepository,

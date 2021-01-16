@@ -11,6 +11,7 @@ import com.github.novikovmn.spring2.exception.UserTypeNotFoundException;
 import com.github.novikovmn.spring2.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -36,16 +37,18 @@ public class UserService {
     private User saveTypicallyUser(UserDto userDto) {
         User user = createUserFromDto(userDto);
 
-        Role role = roleService.getByName("ROLE_CUSTOMER");
+        Role role = roleService.getByName("CUSTOMER");
         user.setRoles(List.of(role));
+        user.setBalance(BigDecimal.ZERO);
         return userRepository.save(user);
     }
 
     private User saveManager(UserDto userDto) {
         if (userDto.getAge() > 18) {
             User user = createUserFromDto(userDto);
-            Role role = roleService.getByName("ROLE_MANAGER");
+            Role role = roleService.getByName("MANAGER");
             user.setRoles(List.of(role));
+            user.setBalance(BigDecimal.ZERO);
             return userRepository.save(user);
         }
         throw new ManagerIsEarlierThanNeedException("Пользователь младше 18 лет");
@@ -67,7 +70,7 @@ public class UserService {
         if (role == null) { return userRepository.findAll(); }
         try {
             RoleDto roleDto = RoleDto.fromRole(role);
-            Role userRole = roleService.getByName(roleDto.getRole());
+            Role userRole = roleService.getByName(roleDto.name());
             return userRepository.findAllByRoles(userRole);
         } catch (IllegalArgumentException e) {
             throw new UserTypeNotFoundException(String.format("Тип пользователя %s не существует", role));

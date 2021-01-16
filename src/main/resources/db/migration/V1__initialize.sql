@@ -48,6 +48,7 @@ create table users (
     first_name          VARCHAR(50),
     last_name           VARCHAR(50),
     age                 INTEGER,
+    balance             NUMERIC(8, 2),
     PRIMARY KEY (id)
 );
 
@@ -69,18 +70,18 @@ create table users_roles (
 
 insert into roles
     (name) values
-    ('ROLE_CUSTOMER'),
-    ('ROLE_MANAGER'),
-    ('ROLE_ADMIN');
+    ('CUSTOMER'),
+    ('MANAGER'),
+    ('ADMIN');
 
 insert into users
-    (phone, password, first_name, last_name, email, age) values
-    ('1111111111','$2y$12$rxg3cYnpaZsNwAVuaiKZXeDb69dR.h9foNdfARmOp/9UBRLymKV22','admin-fn','admin-ln','admin@gmail.com', 25),
-    ('2222222222','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','manager1-fn','manager1-ln','manager1@gmail.com', 24),
-    ('3333333333','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','manager2-fn','manager2-ln','manager2@gmail.com', 23),
-    ('4444444444','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','customer1-fn','customer1-ln','customer1@gmail.com', 22),
-    ('5555555555','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','customer2-fn','customer2-ln','customer2@gmail.com', 21),
-    ('6666666666','$2a$04$gPMdKjz72XGf1O2osAbKJek4dbMUikcvs/YlXncnApKAIGHV852zm','customer3-fn','customer3-ln','customer3@gmail.com', 20);
+    (phone, password, first_name, last_name, email, age, balance) values
+    ('1111111111','$2y$12$rxg3cYnpaZsNwAVuaiKZXeDb69dR.h9foNdfARmOp/9UBRLymKV22','admin-fn','admin-ln','admin@gmail.com', 25, 500.25),
+    ('2222222222','$2y$12$2znBKu1hJDfirEl11JkGJu.DmJ3NJt5E3Fwnne9ZnZ9V4y9jJRAnq','manager1-fn','manager1-ln','manager1@gmail.com', 24, 500),
+    ('3333333333','$2y$12$crw8TU6zv55ZdKW6WSn2I.9/gS5zjeMCdBRPb6aF1PG9t4doQzPaa','manager2-fn','manager2-ln','manager2@gmail.com', 23, 500),
+    ('4444444444','$2y$12$WL1UGrlik9ovTRD.easRUuyRE8M9LVnbrpOOe/bD0SHfWHgg7lSRa','customer1-fn','customer1-ln','customer1@gmail.com', 22, 500),
+    ('5555555555','$2y$12$cpr8mi8rf2rivQVcqc6sbO.9z9wRmBRu83wP.Pst5X2uoW.xgxlRq','customer2-fn','customer2-ln','customer2@gmail.com', 21, 500),
+    ('6666666666','$2y$12$LTAaKjdTc.uEYTpaW.gCs.AY0kADnXjP2d6aTwCrFHDsKdDhd7g36','customer3-fn','customer3-ln','customer3@gmail.com', 20, 500);
 
 insert into users_roles
     (user_id, role_id)  values

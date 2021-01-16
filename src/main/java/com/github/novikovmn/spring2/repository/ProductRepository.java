@@ -1,5 +1,6 @@
 package com.github.novikovmn.spring2.repository;
 
+import com.github.novikovmn.spring2.domain.Category;
 import com.github.novikovmn.spring2.domain.Product;
 import org.springframework.data.repository.CrudRepository;
 

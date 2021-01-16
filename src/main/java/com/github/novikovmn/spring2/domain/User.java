@@ -3,6 +3,7 @@ package com.github.novikovmn.spring2.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -25,6 +26,8 @@ public class User {
     private String email;
     @Column(name = "age")
     private Integer age;
+    @Column(name = "balance")
+    private BigDecimal balance;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
